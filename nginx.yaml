@@ -1,0 +1,44 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: argocd-test-app
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zedtux-deployment
+  namespace: argocd-test-app
+  labels:
+    app: zedtux
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: zedtux
+  template:
+    metadata:
+      labels:
+        app: zedtux
+    spec:
+      containers:
+      - name: zedtux
+        image: zedtux/docker-coming-soon:1.0.0
+        ports:
+        - containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zedtux-service
+  namespace: argocd-test-app
+spec:
+  selector:
+    app: zedtux
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: LoadBalancer
