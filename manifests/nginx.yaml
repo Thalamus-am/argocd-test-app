@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
       - name: zedtux
-        image: zedtux/docker-coming-soon:1.0.0
+        image: zedtux/docker-coming-soon:1.1.1
         ports:
         - containerPort: 80
 
