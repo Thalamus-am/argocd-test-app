@@ -26,7 +26,17 @@ spec:
       - name: zedtux
         image: paulbouwer/hello-kubernetes:1.10
         ports:
-        - containerPort: 80
+        - containerPort: 8080
+        readinessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 15
+          periodSeconds: 20
 
 ---
 apiVersion: v1
